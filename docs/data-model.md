@@ -1,8 +1,4 @@
-# LearnLog data model (planned)
-
-This document describes the **intended** domain models. Implementation starts
-in Phase 2. Field names below are the contract for Markdown frontmatter and
-YAML files.
+# LearnLog data model
 
 ## Conventions
 
@@ -75,8 +71,7 @@ Example: `data/entries/2026/08/24/kubernetes-services.md`
 
 Frontmatter holds structured metadata. The Markdown body holds human-readable
 sections (what was learned, understanding, hands-on work, gaps, next steps).
-Phase 4 will define the generator’s section headings; the example in
-`examples/learning-entry.md` is the reference shape.
+The generator’s section headings match `examples/learning-entry.md`.
 
 ## Achievement
 
@@ -113,11 +108,11 @@ Public portfolio (Phase 9) includes records where `visibility == public`.
 Private records remain in Git for the owner and are excluded from the site.
 Changing visibility must not require renaming files.
 
-## Assumptions (Phase 1)
+## Assumptions
 
-- `summary` in frontmatter is the required short description; body sections are
-  optional until the generator exists.
+- `summary` in frontmatter is the required short description; body sections hold
+  the narrative.
 - Resource `provider` / `type` are unconstrained strings with examples, not a
   closed enum in code.
-- Entry `id` may include the date prefix; the filename slug may omit the date
-  because the path already has `YYYY/MM/DD`.
+- Entry `id` is `{date}-{slug}`; the filename slug omits the date because the
+  path already has `YYYY/MM/DD`.
