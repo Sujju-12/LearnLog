@@ -14,6 +14,7 @@ from learnlog.services.processor import (
     parse_resource_spec,
     search_entries,
 )
+from learnlog.services.progress import write_progress_markdown
 from learnlog.services.storage import load_all_achievements, load_all_entries
 from learnlog.settings import Settings, find_repo_root
 
@@ -30,6 +31,15 @@ def _csv(values: list[str] | None) -> list[str]:
 def _settings(root: str | None) -> Settings:
     base = Path(root).resolve() if root else find_repo_root()
     return Settings.from_root(base)
+
+
+def _refresh_derived(settings: Settings) -> Path:
+    write_generated_index(settings)
+    return write_progress_markdown(
+        settings,
+        load_all_entries(settings),
+        load_all_achievements(settings),
+    )
 
 
 def _add_parser(sub: argparse._SubParsersAction) -> None:
@@ -127,6 +137,12 @@ def build_parser() -> argparse.ArgumentParser:
         help="Also write data/generated/index.json",
     )
     stats.set_defaults(handler=_cmd_stats)
+
+    publish = sub.add_parser(
+        "publish",
+        help="Rewrite PROGRESS.md from public entries (GitHub-visible)",
+    )
+    publish.set_defaults(handler=_cmd_publish)
     _achievement_parser(sub)
     return parser
 
@@ -151,7 +167,7 @@ def _cmd_add(args: argparse.Namespace) -> int:
         knowledge_gaps=args.gaps,
         next_steps=args.next_steps,
     )
-    write_generated_index(settings)
+    _refresh_derived(settings)
     print(f"Captured {entry.id}")
     shown = (
         path.relative_to(settings.root) if path.is_relative_to(settings.root) else path
@@ -235,6 +251,13 @@ def _cmd_stats(args: argparse.Namespace) -> int:
     return 0
 
 
+def _cmd_publish(args: argparse.Namespace) -> int:
+    settings = _settings(args.root)
+    path = _refresh_derived(settings)
+    print(path)
+    return 0
+
+
 def _cmd_achievement_add(args: argparse.Namespace) -> int:
     settings = _settings(args.root)
     achievement, path = capture_achievement(
@@ -248,7 +271,7 @@ def _cmd_achievement_add(args: argparse.Namespace) -> int:
         related_topics=_csv(args.topic),
         notes=args.notes,
     )
-    write_generated_index(settings)
+    _refresh_derived(settings)
     print(f"Recorded {achievement.id}")
     print(path)
     return 0
