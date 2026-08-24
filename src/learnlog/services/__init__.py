@@ -6,6 +6,7 @@ from learnlog.services.processor import (
     capture_entry,
     search_entries,
 )
+from learnlog.services.progress import write_progress_markdown
 from learnlog.services.storage import (
     load_all_achievements,
     load_all_entries,
@@ -21,4 +22,5 @@ __all__ = [
     "save_entry",
     "search_entries",
     "write_generated_index",
+    "write_progress_markdown",
 ]
