@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "learnlog"
-version = "0.1.0"
+version = "0.2.0"
 description = "Git-native personal learning diary and learning portfolio."
 readme = "README.md"
 license = { file = "LICENSE" }
@@ -33,13 +33,19 @@ classifiers = [
   "Topic :: Education",
   "Typing :: Typed",
 ]
-dependencies = []
+dependencies = [
+  "pydantic>=2.0",
+  "pyyaml>=6.0",
+]
 
 [project.optional-dependencies]
 dev = [
   "pytest>=8.0",
   "ruff>=0.6",
 ]
+
+[project.scripts]
+learnlog = "learnlog.cli:main"
 
 [project.urls]
 Homepage = "https://github.com/Sujju-12/LearnLog"

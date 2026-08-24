@@ -1,5 +1,13 @@
 """LearnLog — Git-native personal learning diary and portfolio."""
 
-__all__ = ["__version__"]
+from learnlog.models import Achievement, LearningEntry, Resource, Visibility
 
-__version__ = "0.1.0"
+__all__ = [
+    "Achievement",
+    "LearningEntry",
+    "Resource",
+    "Visibility",
+    "__version__",
+]
+
+__version__ = "0.2.0"
