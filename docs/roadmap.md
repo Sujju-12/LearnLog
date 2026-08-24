@@ -3,49 +3,33 @@
 Work proceeds in phases. Each phase should land as a reviewable increment with
 tests. Do not skip ahead unless a later phase is blocked.
 
-## Phase 1 — Foundation (current)
+## Phase 1 — Foundation
 
-- Repository layout
-- `pyproject.toml`, pytest, Ruff
-- README and architecture docs
-- Example entry and achievement files
-- Example settings
-
-**Not in this phase:** models, CLI, GitHub Actions, website, AI.
+Complete.
 
 ## Phase 2 — Domain models
 
-- `Resource`, `LearningEntry`, `Achievement`
-- Validation (Pydantic only if it clearly helps)
-- Unit tests for required fields, visibility, multi-resource entries
+Complete. Pydantic models with open-string providers.
 
 ## Phase 3 — Storage layer
 
-- Load/save Markdown entries with YAML frontmatter
-- Load/save achievement YAML
-- Slug generation and `data/entries/YYYY/MM/DD/` paths
+Complete. `data/entries/YYYY/MM/DD/<slug>.md`
 
 ## Phase 4 — Markdown generation
 
-- `LearningEntry` → Markdown with valid frontmatter
-- Structured body sections matching `examples/learning-entry.md`
+Complete.
 
 ## Phase 5 — Local processing
 
-- Accept structured input
-- Validate, generate, and write an entry to the date-based path
+Complete. `learnlog add`
 
 ## Phase 6 — Statistics and indexing
 
-- Topic, skill, and provider indexes
-- Learning and achievement counts
-- Generated JSON under `data/generated/`
+Complete. `learnlog stats` and `data/generated/index.json`
 
 ## Phase 7 — CLI
 
-- `learnlog add`, `list`, `search`, `stats`
-- `learnlog achievement add`
-- CLI calls services only; no domain logic in the CLI module
+Complete. `add`, `list`, `search`, `show`, `stats`, `achievement add|list`
 
 ## Phase 8 — GitHub integration
 
