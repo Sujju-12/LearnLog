@@ -53,3 +53,29 @@ def test_cli_add_list_search_stats(tmp_path: Path) -> None:
         == 0
     )
     assert (tmp_path / "data/generated/index.json").exists()
+    assert (
+        main(
+            [
+                "--root",
+                root,
+                "add",
+                "--title",
+                "Linux Foundation: file permissions",
+                "--summary",
+                "chmod and umask from LFS101x",
+                "--date",
+                "2026-08-10",
+                "--visibility",
+                "public",
+                "--topic",
+                "linux",
+                "--resource",
+                "Linux Foundation|course|Introduction to Linux|https://training.linuxfoundation.org/",
+            ]
+        )
+        == 0
+    )
+    assert main(["--root", root, "publish"]) == 0
+    progress = (tmp_path / "PROGRESS.md").read_text(encoding="utf-8")
+    assert "Linux Foundation: file permissions" in progress
+    assert "Terraform state" not in progress
