@@ -1,0 +1,16 @@
+id: aws-certified-cloud-practitioner
+title: AWS Certified Cloud Practitioner
+provider: AWS
+date_earned: 2026-08-01
+visibility: public
+credential_url: ""
+skills:
+  - aws-fundamentals
+  - cloud-billing
+related_topics:
+  - aws
+  - cloud
+badge_image: ""
+certificate_file: ""
+status: earned
+notes: Foundational certification used as a public portfolio item.

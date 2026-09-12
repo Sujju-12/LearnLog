@@ -1,0 +1,20 @@
+# LearnLog configuration example
+#
+# Copy this file to config/settings.yaml (gitignored locally if you prefer)
+# or keep a user-specific settings file outside the shared tree.
+#
+# Phase 1 stores conventions only. Runtime loading lands in later phases.
+
+learnlog:
+  data_root: data
+  entries_dir: data/entries
+  achievements_dir: data/achievements
+  resources_dir: data/resources
+  generated_dir: data/generated
+  default_visibility: private
+  timezone: UTC
+
+# Optional AI providers stay disabled until Phase 10.
+ai:
+  enabled: false
+  provider: null
